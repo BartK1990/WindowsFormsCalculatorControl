@@ -13,11 +13,10 @@ namespace WindowsFormsCalculatorControl
 {
     public partial class CalculatorControl: UserControl
     {
-        private double resultValue = 0;
-        private double lastValue = 0;
-        private char lastOperation;
-        private int lastTypePressed = 0; // 0 - nothing or C, 1 - number, 2 - sign
-        char decimalSeparator = Convert.ToChar(Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+        private double _resultValue = 0;
+        private char _lastOperation;
+        private int _lastTypePressed = 0; // 0 - nothing or C, 1 - number, 2 - sign
+        readonly char _decimalSeparator = Convert.ToChar(Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator);
 
         public CalculatorControl()
         {
@@ -33,42 +32,40 @@ namespace WindowsFormsCalculatorControl
 
                 if (operation == 'C')
                 {
-                    resultValue = 0;
-                    lastTypePressed = 0;
+                    _resultValue = 0;
+                    _lastTypePressed = 0;
                 }
                 else
                 {
-                    if (lastTypePressed != 1) 
+                    if (_lastTypePressed != 1) 
                     { 
                         if (double.TryParse(Display.Text, out double result))
                         {
                             double currentValue = result;
-                            lastValue = resultValue;
-
-                            switch (lastOperation)
+                            switch (_lastOperation)
                             {
                                 case '+':
-                                    resultValue += currentValue;
+                                    _resultValue += currentValue;
                                     break;
                                 case '-':
-                                    resultValue -= currentValue;
+                                    _resultValue -= currentValue;
                                     break;
                                 case '×':
-                                    resultValue *= currentValue;
+                                    _resultValue *= currentValue;
                                     break;
                                 case '÷':
-                                    resultValue /= currentValue;
+                                    _resultValue /= currentValue;
                                     break;
                                 default:
-                                    resultValue = currentValue;
+                                    _resultValue = currentValue;
                                     break;
                             }
                         }
                     }
                 }
-                lastOperation = operation;
-                Display.Text = resultValue.ToString();
-                lastTypePressed = 1;
+                _lastOperation = operation;
+                Display.Text = _resultValue.ToString();
+                _lastTypePressed = 1;
             }
             catch
             {
@@ -82,11 +79,11 @@ namespace WindowsFormsCalculatorControl
             var number = (sender as Button)?.Text;
             if (!(number is string)) return;
             if (number == ".")
-                number = decimalSeparator.ToString();
-            if (Display.Text.Contains(decimalSeparator.ToString()) && number.Contains(decimalSeparator.ToString())) return;
-            if (lastTypePressed == 2)
+                number = _decimalSeparator.ToString();
+            if (Display.Text.Contains(_decimalSeparator.ToString()) && number.Contains(_decimalSeparator.ToString())) return;
+            if (_lastTypePressed == 2)
             {
-                Display.Text = Display.Text == "0" ? number : Display.Text + number;
+                Display.Text = Display.Text == @"0" ? number : Display.Text + number;
             }
             else
             {
@@ -95,7 +92,7 @@ namespace WindowsFormsCalculatorControl
                     Display.Text = number;
                 }
             }
-            lastTypePressed = 2;
+            _lastTypePressed = 2;
         }
     }
 }
