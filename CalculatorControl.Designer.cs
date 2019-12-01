@@ -41,13 +41,13 @@
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button16 = new System.Windows.Forms.Button();
-            this.button17 = new System.Windows.Forms.Button();
+            this.addition_button = new System.Windows.Forms.Button();
+            this.subtraction_button = new System.Windows.Forms.Button();
+            this.multiplication_button = new System.Windows.Forms.Button();
+            this.division_button = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2.SuspendLayout();
+            this.CalculatorLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.CalculatorLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // Display
@@ -55,15 +55,16 @@
             this.Display.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel2.SetColumnSpan(this.Display, 4);
+            this.CalculatorLayoutPanel.SetColumnSpan(this.Display, 4);
             this.Display.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Display.Location = new System.Drawing.Point(0, 0);
             this.Display.Margin = new System.Windows.Forms.Padding(0);
             this.Display.Name = "Display";
-            this.Display.ReadOnly = true;
             this.Display.Size = new System.Drawing.Size(192, 41);
             this.Display.TabIndex = 0;
             this.Display.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Display.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Display_KeyDown);
+            this.Display.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Display_KeyPress);
             // 
             // button2
             // 
@@ -245,65 +246,65 @@
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.Operator_Pressed);
             // 
-            // button14
+            // addition_button
             // 
-            this.button14.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.addition_button.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button14.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button14.Location = new System.Drawing.Point(144, 84);
-            this.button14.Margin = new System.Windows.Forms.Padding(0);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(48, 42);
-            this.button14.TabIndex = 2;
-            this.button14.Text = "+";
-            this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.Operator_Pressed);
+            this.addition_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addition_button.Location = new System.Drawing.Point(144, 84);
+            this.addition_button.Margin = new System.Windows.Forms.Padding(0);
+            this.addition_button.Name = "addition_button";
+            this.addition_button.Size = new System.Drawing.Size(48, 42);
+            this.addition_button.TabIndex = 2;
+            this.addition_button.Text = "+";
+            this.addition_button.UseVisualStyleBackColor = true;
+            this.addition_button.Click += new System.EventHandler(this.Operator_Pressed);
             // 
-            // button15
+            // subtraction_button
             // 
-            this.button15.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.subtraction_button.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button15.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button15.Location = new System.Drawing.Point(144, 126);
-            this.button15.Margin = new System.Windows.Forms.Padding(0);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(48, 42);
-            this.button15.TabIndex = 2;
-            this.button15.Text = "-";
-            this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.Operator_Pressed);
+            this.subtraction_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.subtraction_button.Location = new System.Drawing.Point(144, 126);
+            this.subtraction_button.Margin = new System.Windows.Forms.Padding(0);
+            this.subtraction_button.Name = "subtraction_button";
+            this.subtraction_button.Size = new System.Drawing.Size(48, 42);
+            this.subtraction_button.TabIndex = 2;
+            this.subtraction_button.Text = "-";
+            this.subtraction_button.UseVisualStyleBackColor = true;
+            this.subtraction_button.Click += new System.EventHandler(this.Operator_Pressed);
             // 
-            // button16
+            // multiplication_button
             // 
-            this.button16.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.multiplication_button.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button16.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button16.Location = new System.Drawing.Point(144, 168);
-            this.button16.Margin = new System.Windows.Forms.Padding(0);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(48, 42);
-            this.button16.TabIndex = 2;
-            this.button16.Text = "×";
-            this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(this.Operator_Pressed);
+            this.multiplication_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.multiplication_button.Location = new System.Drawing.Point(144, 168);
+            this.multiplication_button.Margin = new System.Windows.Forms.Padding(0);
+            this.multiplication_button.Name = "multiplication_button";
+            this.multiplication_button.Size = new System.Drawing.Size(48, 42);
+            this.multiplication_button.TabIndex = 2;
+            this.multiplication_button.Text = "×";
+            this.multiplication_button.UseVisualStyleBackColor = true;
+            this.multiplication_button.Click += new System.EventHandler(this.Operator_Pressed);
             // 
-            // button17
+            // division_button
             // 
-            this.button17.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.division_button.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button17.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button17.Location = new System.Drawing.Point(144, 210);
-            this.button17.Margin = new System.Windows.Forms.Padding(0);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(48, 44);
-            this.button17.TabIndex = 2;
-            this.button17.Text = "÷";
-            this.button17.UseVisualStyleBackColor = true;
-            this.button17.Click += new System.EventHandler(this.Operator_Pressed);
+            this.division_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.division_button.Location = new System.Drawing.Point(144, 210);
+            this.division_button.Margin = new System.Windows.Forms.Padding(0);
+            this.division_button.Name = "division_button";
+            this.division_button.Size = new System.Drawing.Size(48, 44);
+            this.division_button.TabIndex = 2;
+            this.division_button.Text = "÷";
+            this.division_button.UseVisualStyleBackColor = true;
+            this.division_button.Click += new System.EventHandler(this.Operator_Pressed);
             // 
             // button1
             // 
@@ -320,68 +321,70 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Operator_Pressed);
             // 
-            // tableLayoutPanel2
+            // CalculatorLayoutPanel
             // 
-            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.CalculatorLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel2.ColumnCount = 4;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.Controls.Add(this.button17, 3, 5);
-            this.tableLayoutPanel2.Controls.Add(this.Display, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.button1, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.button14, 3, 2);
-            this.tableLayoutPanel2.Controls.Add(this.button3, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.button15, 3, 3);
-            this.tableLayoutPanel2.Controls.Add(this.button4, 2, 2);
-            this.tableLayoutPanel2.Controls.Add(this.button16, 3, 4);
-            this.tableLayoutPanel2.Controls.Add(this.button5, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.button13, 2, 5);
-            this.tableLayoutPanel2.Controls.Add(this.button6, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.button7, 2, 3);
-            this.tableLayoutPanel2.Controls.Add(this.button12, 1, 5);
-            this.tableLayoutPanel2.Controls.Add(this.button11, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.button8, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.button9, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.button10, 2, 4);
-            this.tableLayoutPanel2.Controls.Add(this.button2, 0, 2);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(12, 12);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 6;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(192, 254);
-            this.tableLayoutPanel2.TabIndex = 4;
+            this.CalculatorLayoutPanel.ColumnCount = 4;
+            this.CalculatorLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.CalculatorLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.CalculatorLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.CalculatorLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.CalculatorLayoutPanel.Controls.Add(this.division_button, 3, 5);
+            this.CalculatorLayoutPanel.Controls.Add(this.Display, 0, 0);
+            this.CalculatorLayoutPanel.Controls.Add(this.button1, 0, 1);
+            this.CalculatorLayoutPanel.Controls.Add(this.addition_button, 3, 2);
+            this.CalculatorLayoutPanel.Controls.Add(this.button3, 1, 2);
+            this.CalculatorLayoutPanel.Controls.Add(this.subtraction_button, 3, 3);
+            this.CalculatorLayoutPanel.Controls.Add(this.button4, 2, 2);
+            this.CalculatorLayoutPanel.Controls.Add(this.multiplication_button, 3, 4);
+            this.CalculatorLayoutPanel.Controls.Add(this.button5, 0, 3);
+            this.CalculatorLayoutPanel.Controls.Add(this.button13, 2, 5);
+            this.CalculatorLayoutPanel.Controls.Add(this.button6, 1, 3);
+            this.CalculatorLayoutPanel.Controls.Add(this.button7, 2, 3);
+            this.CalculatorLayoutPanel.Controls.Add(this.button12, 1, 5);
+            this.CalculatorLayoutPanel.Controls.Add(this.button11, 0, 5);
+            this.CalculatorLayoutPanel.Controls.Add(this.button8, 0, 4);
+            this.CalculatorLayoutPanel.Controls.Add(this.button9, 1, 4);
+            this.CalculatorLayoutPanel.Controls.Add(this.button10, 2, 4);
+            this.CalculatorLayoutPanel.Controls.Add(this.button2, 0, 2);
+            this.CalculatorLayoutPanel.Location = new System.Drawing.Point(12, 12);
+            this.CalculatorLayoutPanel.Name = "CalculatorLayoutPanel";
+            this.CalculatorLayoutPanel.RowCount = 6;
+            this.CalculatorLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.CalculatorLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.CalculatorLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.CalculatorLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.CalculatorLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.CalculatorLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.CalculatorLayoutPanel.Size = new System.Drawing.Size(192, 254);
+            this.CalculatorLayoutPanel.TabIndex = 4;
+            this.CalculatorLayoutPanel.Click += new System.EventHandler(this.CalculatorLayoutPanel_Click);
             // 
             // CalculatorControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tableLayoutPanel2);
+            this.Controls.Add(this.CalculatorLayoutPanel);
             this.MinimumSize = new System.Drawing.Size(216, 278);
             this.Name = "CalculatorControl";
             this.Size = new System.Drawing.Size(216, 278);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
+            this.Click += new System.EventHandler(this.CalculatorControl_Click);
+            this.CalculatorLayoutPanel.ResumeLayout(false);
+            this.CalculatorLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button17;
-        private System.Windows.Forms.Button button16;
+        private System.Windows.Forms.Button division_button;
+        private System.Windows.Forms.Button multiplication_button;
         private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Button subtraction_button;
         private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button addition_button;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button12;
@@ -394,6 +397,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox Display;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel CalculatorLayoutPanel;
     }
 }
