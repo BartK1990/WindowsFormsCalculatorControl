@@ -40,7 +40,7 @@
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
+            this.result_button = new System.Windows.Forms.Button();
             this.addition_button = new System.Windows.Forms.Button();
             this.subtraction_button = new System.Windows.Forms.Button();
             this.multiplication_button = new System.Windows.Forms.Button();
@@ -63,6 +63,7 @@
             this.Display.Size = new System.Drawing.Size(192, 41);
             this.Display.TabIndex = 0;
             this.Display.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Display.TextChanged += new System.EventHandler(this.Display_TextChanged);
             this.Display.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Display_KeyDown);
             this.Display.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Display_KeyPress);
             // 
@@ -231,20 +232,20 @@
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.Number_Pressed);
             // 
-            // button13
+            // result_button
             // 
-            this.button13.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.result_button.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button13.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button13.Location = new System.Drawing.Point(96, 210);
-            this.button13.Margin = new System.Windows.Forms.Padding(0);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(48, 44);
-            this.button13.TabIndex = 2;
-            this.button13.Text = "=";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.Operator_Pressed);
+            this.result_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.result_button.Location = new System.Drawing.Point(96, 210);
+            this.result_button.Margin = new System.Windows.Forms.Padding(0);
+            this.result_button.Name = "result_button";
+            this.result_button.Size = new System.Drawing.Size(48, 44);
+            this.result_button.TabIndex = 2;
+            this.result_button.Text = "=";
+            this.result_button.UseVisualStyleBackColor = true;
+            this.result_button.Click += new System.EventHandler(this.Operator_Pressed);
             // 
             // addition_button
             // 
@@ -340,7 +341,7 @@
             this.CalculatorLayoutPanel.Controls.Add(this.button4, 2, 2);
             this.CalculatorLayoutPanel.Controls.Add(this.multiplication_button, 3, 4);
             this.CalculatorLayoutPanel.Controls.Add(this.button5, 0, 3);
-            this.CalculatorLayoutPanel.Controls.Add(this.button13, 2, 5);
+            this.CalculatorLayoutPanel.Controls.Add(this.result_button, 2, 5);
             this.CalculatorLayoutPanel.Controls.Add(this.button6, 1, 3);
             this.CalculatorLayoutPanel.Controls.Add(this.button7, 2, 3);
             this.CalculatorLayoutPanel.Controls.Add(this.button12, 1, 5);
@@ -381,7 +382,7 @@
 
         private System.Windows.Forms.Button division_button;
         private System.Windows.Forms.Button multiplication_button;
-        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button result_button;
         private System.Windows.Forms.Button subtraction_button;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button addition_button;

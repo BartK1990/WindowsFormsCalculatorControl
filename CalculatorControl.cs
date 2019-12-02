@@ -42,7 +42,8 @@ namespace WindowsFormsCalculatorControl
                 addition_button,
                 subtraction_button,
                 multiplication_button,
-                division_button
+                division_button,
+                result_button
             };
             _buttonBackColor = addition_button.BackColor;
         }
@@ -57,19 +58,21 @@ namespace WindowsFormsCalculatorControl
             {
                 char operation = (sender as Button).Text[0];
 
+                // Clear button colors
+                foreach (Button button in _signButtonsList)
+                    button.UseVisualStyleBackColor = true;
+
                 if (operation == 'C')
                 {
                     _resultValue = 0;
                     _lastTypePressed = 0;
                     _lastOperation = default(char);
-                    Display.Text = "";
+                    DisplaySetTextAndClearSel("");
                 }
                 else
                 {
-                    if (_lastTypePressed == 1) return;
                     if (!double.TryParse(Display.Text, out double result)) return;
                     double currentValue = result;
-                    bool equalSign = false;
                     switch (operation)
                     {
                         case '+':
@@ -87,39 +90,40 @@ namespace WindowsFormsCalculatorControl
                             division_button.BackColor = _defaultActiveButtonColor;
                             break;
                         default:
-                            equalSign = true;
-                            _lastTypePressed = 2;
+                            result_button.BackColor = _defaultActiveButtonColor;
                             break;
                     }
-                    switch (_lastOperation)
+                    if (_lastTypePressed != 1)
                     {
-                        case '+':
-                            _resultValue += currentValue;
-                            break;
-                        case '-':
-                            _resultValue -= currentValue;
-                            break;
-                        case '×':
-                        case '*':
-                            _resultValue *= currentValue;
-                            break;
-                        case '÷':
-                        case '/':
-                            _resultValue /= currentValue;
-                            break;
-                        default:
-                            _resultValue = currentValue;
-                            break;
+                        switch (_lastOperation)
+                        {
+                            case '+':
+                                _resultValue += currentValue;
+                                break;
+                            case '-':
+                                _resultValue -= currentValue;
+                                break;
+                            case '×':
+                            case '*':
+                                _resultValue *= currentValue;
+                                break;
+                            case '÷':
+                            case '/':
+                                _resultValue /= currentValue;
+                                break;
+                            default:
+                                _resultValue = currentValue;
+                                break;
+                        }
                     }
-                    Display.Text = _resultValue.ToString(CultureInfo.InvariantCulture);
                     _lastOperation = operation;
-                    if (equalSign) return;
+                    DisplaySetTextAndClearSel(_resultValue.ToString());
                     _lastTypePressed = 1;
                 }
             }
             catch
             {
-                Display.Text = "";
+                DisplaySetTextAndClearSel("");
             }
         }
 
@@ -130,9 +134,7 @@ namespace WindowsFormsCalculatorControl
 
             // Clear button colors
             foreach (Button button in _signButtonsList)
-            {
                 button.UseVisualStyleBackColor = true;
-            }
 
             // Add it to the display.
             var number = (sender as Button)?.Text;
@@ -142,16 +144,22 @@ namespace WindowsFormsCalculatorControl
             if (Display.Text.Contains(_decimalSeparator.ToString()) && number.Contains(_decimalSeparator.ToString())) return;
             if (_lastTypePressed == 2)
             {
-                Display.Text = Display.Text == @"0" ? number : Display.Text + number;
+                DisplaySetTextAndClearSel(Display.Text == @"0" ? number : Display.Text + number);
             }
             else
             {
                 if (double.TryParse(number, out double result))
                 {
-                    Display.Text = number;
+                    DisplaySetTextAndClearSel(number);
                 }
             }
             _lastTypePressed = 2;
+        }
+
+        private void DisplaySetTextAndClearSel(string s)
+        {
+            Display.Text = s;
+            Display.SelectionLength = 0;
         }
 
         private bool _numberEntered = false;
@@ -189,7 +197,7 @@ namespace WindowsFormsCalculatorControl
             // Determine whether the keystroke is a number from the top of the keyboard.
             if ((e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) || 
                 (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9) || // Determine whether the keystroke is a number from the keypad.
-                e.KeyCode == Keys.Decimal) // Determine whether the keystroke is a decimal place separator
+                 e.KeyCode == Keys.Decimal || e.KeyCode == Keys.Oemcomma)// Determine whether the keystroke is a decimal place separator
             {
                 _numberEntered = true;
             }
@@ -209,6 +217,7 @@ namespace WindowsFormsCalculatorControl
             }
         }
 
+        // Display select handling
         private void CalculatorControl_Click(object sender, EventArgs e)
         {
             Display.Select();
@@ -219,11 +228,18 @@ namespace WindowsFormsCalculatorControl
             Display.Select();
         }
 
+        // Invisible caret handling
         [DllImport("user32.dll")]
         static extern bool HideCaret(IntPtr hWnd);
         private void Display_GotFocus(object sender, EventArgs e)
         {
             HideCaret(Display.Handle);
+        }
+
+        // Always unselect text handling
+        private void Display_TextChanged(object sender, EventArgs e)
+        {
+            Display.SelectionLength = 0;
         }
     }
 }
