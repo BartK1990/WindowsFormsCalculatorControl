@@ -15,7 +15,7 @@ namespace WindowsFormsCalculatorControl
 {
     public partial class CalculatorControl: UserControl
     {
-        private double _resultValue = 0;
+        private decimal _resultValue = 0;
         private char _lastOperation;
         private int _lastTypePressed = 0; // 0 - nothing or C, 1 - number, 2 - sign
         private readonly char _decimalSeparator = Convert.ToChar(Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator);
@@ -71,8 +71,8 @@ namespace WindowsFormsCalculatorControl
                 }
                 else
                 {
-                    if (!double.TryParse(Display.Text, out double result)) return;
-                    double currentValue = result;
+                    if (!decimal.TryParse(Display.Text, out decimal result)) return;
+                    decimal currentValue = result;
                     switch (operation)
                     {
                         case '+':
